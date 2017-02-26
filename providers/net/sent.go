@@ -2,6 +2,7 @@ package net
 
 import (
 	"fmt"
+	"github.com/johhy/gdwmstatusbar/utils"
 	"github.com/shirou/gopsutil/net"
 	"time"
 )
@@ -49,5 +50,5 @@ func (s *SENT) GetValue() string {
 		s.value = val
 	default:
 	}
-	return digitFormat(s.value)
+	return utils.DigitFormat(s.value)
 }

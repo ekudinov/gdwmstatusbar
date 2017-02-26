@@ -34,6 +34,11 @@ func (c *CPU) Start() {
 	}()
 }
 
+//conver to string form inner format
+func convert(val float64) string {
+	return fmt.Sprintf("%.2f", val)
+}
+
 //Get value from channel - non blocking
 //When new value it save in prev and return it
 //if no message in channel return prev value
@@ -44,5 +49,4 @@ func (c *CPU) GetValue() string {
 	default:
 	}
 	return convert(c.value)
-
 }

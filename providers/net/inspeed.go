@@ -2,6 +2,7 @@ package net
 
 import (
 	"fmt"
+	"github.com/johhy/gdwmstatusbar/utils"
 	"github.com/shirou/gopsutil/net"
 	"time"
 )
@@ -62,5 +63,5 @@ func (i *INSPEED) GetValue() string {
 		i.value = val
 	default:
 	}
-	return inseconds(i.value)
+	return utils.BitSeconds(i.value)
 }

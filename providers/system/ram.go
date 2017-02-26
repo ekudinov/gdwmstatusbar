@@ -2,6 +2,7 @@ package system
 
 import (
 	"fmt"
+	"github.com/johhy/gdwmstatusbar/utils"
 	"github.com/shirou/gopsutil/mem"
 	"time"
 )
@@ -43,5 +44,5 @@ func (r *RAM) GetValue() string {
 		r.value = val
 	default:
 	}
-	return digitFormat(r.value)
+	return utils.DigitFormat(r.value)
 }

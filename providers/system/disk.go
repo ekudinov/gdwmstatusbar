@@ -2,6 +2,7 @@ package system
 
 import (
 	"fmt"
+	"github.com/johhy/gdwmstatusbar/utils"
 	"github.com/shirou/gopsutil/disk"
 	"time"
 )
@@ -45,5 +46,5 @@ func (d *DISK) GetValue() string {
 		d.value = val
 	default:
 	}
-	return digitFormat(d.value)
+	return utils.DigitFormat(d.value)
 }
