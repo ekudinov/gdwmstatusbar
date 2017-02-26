@@ -22,6 +22,7 @@ func DownBar() *Bar {
 				Field: "IP_O",
 				Provider: &net.OutIP{
 					Url:     "http://ipinfo.io/ip",
+					Wait:    1,
 					Timeout: 100000000,
 				},
 			},

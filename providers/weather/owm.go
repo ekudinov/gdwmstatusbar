@@ -2,9 +2,10 @@ package weather
 
 import (
 	"fmt"
-	owm "github.com/briandowns/openweathermap"
 	"os"
 	"time"
+
+	owm "github.com/briandowns/openweathermap"
 )
 
 //OpenWeatherMap provider
@@ -27,7 +28,9 @@ type OWM struct {
 func (o *OWM) Start() {
 	//Prepare steps
 	if os.Getenv("OWM_API_KEY") == "" {
-		fmt.Println("Error You must set env: export OWM_API_KEY=you key there")
+		fmt.Println(`Error start OWM module. Set env: 
+  		 export OWM_API_KEY=you key there`)
+		return //not start service
 	}
 
 	o.channel = make(chan float64)

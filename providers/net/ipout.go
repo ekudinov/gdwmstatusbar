@@ -13,6 +13,8 @@ type OutIP struct {
 	Url string
 	//Timeout for timer in milliseconds
 	Timeout time.Duration
+	//Wait timeout for response in seconds
+	Wait time.Duration
 	//Channel for values
 	channel chan string
 	//previous value
@@ -29,11 +31,18 @@ func (o *OutIP) Start() {
 			//Set out ip as none
 			//if ip found it updates
 			outIP := "None"
-			resp, err1 := http.Get(o.Url)
-			defer resp.Body.Close()
-			buf, err2 := ioutil.ReadAll(resp.Body)
-			if err1 == nil && err2 == nil {
-				outIP = strings.TrimSpace(string(buf))
+			timeout := time.Duration(o.Wait * time.Second)
+			client := http.Client{
+				Timeout: timeout,
+			}
+			if resp, err := client.Get(o.Url); err == nil {
+				//remoute host ok
+				if outIP == "None" { //ip not define
+					defer resp.Body.Close()
+					if buf, err := ioutil.ReadAll(resp.Body); err == nil {
+						outIP = strings.TrimSpace(string(buf))
+					}
+				}
 			}
 			o.channel <- outIP
 			time.Sleep(o.Timeout * time.Millisecond)
